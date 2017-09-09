@@ -1,1 +1,13 @@
-{"workspace_id": 1, "api_tokens": ["2","3"], "user_agent": "email"}
+{
+  "workspace_id": [
+    WID[0], WID[1]
+  ], 
+  "api_tokens": [
+    "WID_TOKEN[0]", 
+    "WID_TOKEN[1]"
+  ],
+  "user_agent": "MAIL", 
+  "slack_key": "SLACK_KEY", 
+  "slack_botID": "XXXXXXXXX"
+}
+
