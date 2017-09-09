@@ -1,0 +1,2 @@
+# Avoid json-files with sensitive user information to be released publicly
+*.json
