@@ -4,9 +4,13 @@ from pylatex import Document, Section, Subsection, Tabular, Command, base_classe
 from pylatex.utils import bold
 import json
 
-with open('config.json') as data_file:    
+# KEEP IN MIND IN CONFIG: ID1 IS GROUP AND ID2 IS HAMPUS'S OWN WS
+
+with open('config.json') as data_file0:    
     config = json.load(data_file)
 
+with open('members.json') as data_file1:
+    members = json.load(data_file)
 
 geometry_options = {"tmargin": "1cm", "lmargin": "1cm"}
 
@@ -34,9 +38,9 @@ def generate_report(extra_text="", lastweek=False):
         until = datetime.date.today() + datetime.timedelta(days=-(datetime.date.today().weekday()+1))
     else:
         until = datetime.date.today()
-
-    detailed_report = requests.get('https://toggl.com/reports/api/v2/details', params={'user_agent': config["user_agent"], 'workspace_id': config["workspace_id"][0], "since": str(monday), "until": str(until)}, auth=(config["api_tokens"][0], "api_token")).json()["data"]
-    detailed_report += requests.get('https://toggl.com/reports/api/v2/details', params={'user_agent': config["user_agent"], 'workspace_id': config["workspace_id"][1], "since": str(monday), "until": str(until)}, auth=(config["api_tokens"][1], "api_token")).json()["data"]
+    
+    detailed_report = requests.get('https://toggl.com/reports/api/v2/details', params={'user_agent': config["user_agent"], 'workspace_id': config["workspace_id"][0], "since": str(monday), "until": str(until)}, auth=(members[], "api_token")).json()['data']
+    detailed_report += requests.get('https://toggl.com/reports/api/v2/details', params={'user_agent': config["user_agent"], 'workspace_id': config["workspace_id"][1], "since": str(monday), "until": str(until)}, auth=(members[], "api_token")).json()['data']
     detailed_report.sort(key=extract_time, reverse=False)  # Sort first by user and then by start time
     with doc.create(Section('Status')):
         doc.append(extra_text.replace("\r\n","\n"))
